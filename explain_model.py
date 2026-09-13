@@ -6,7 +6,7 @@ from pprint import pprint
 
 
 
-def explain_models(X,y,model):
+def explain_model(X,y,model):
     X = np.array(X)
     y = np.array(y)
     model.fit(X, y)
@@ -19,7 +19,12 @@ def explain_models(X,y,model):
     }
     return results
 
-
+def explain_models(Xs,ys,models):
+    results = []
+    for X,y,model in zip(Xs,ys,models):
+        my_dict = explain_model(X,y,model)
+        results.append(my_dict)
+    return results
      
 
 # if __name__=="__main__":
@@ -55,7 +60,10 @@ def explain_models(X,y,model):
 #         1, 1, 1, 1, 1,
 #         1
 #     ]
+#     Xs = [X,X]
+#     ys = [y,y]
     
-#     model = BayesianRidge()
-#     results = explain_models(X,y,model)
+#     models = [BayesianRidge(),BayesianRidge()]
+
+#     results = explain_models(Xs,ys,models)
 #     pprint(results)
